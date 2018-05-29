@@ -5,9 +5,9 @@ import { signup } from "../../actions/user";
 import SignupForm from "../forms/SignupForm";
 
 class SignupPage extends Component {
-  submit = data => {
+  submit = data =>
     this.props.signup(data).then(() => this.props.history.push("/dashboard"));
-  };
+
   render() {
     return (
       <div>

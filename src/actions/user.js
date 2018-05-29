@@ -3,5 +3,8 @@ import { userLoggedIn } from "./auth";
 
 /* eslint-disable */
 export const signup = data => dispatch => {
-  api.user.signup(data).then(data => dispatch(userLoggedIn(data)));
+  return api.user.signup(data).then(user => {
+    localStorage.setItem("bookwormJWT", user.token);
+    dispatch(userLoggedIn(user));
+  });
 };
