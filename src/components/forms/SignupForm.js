@@ -4,26 +4,24 @@ import PropTypes from "prop-types";
 import Validate from "validator";
 import InlineError from "../messages/InlineError";
 
-class LoginForm extends Component {
-  constructor() {
-    super();
-    this.state = {
-      data: {
-        email: "",
-        password: ""
-      },
-      loading: false,
-      errors: {}
-    };
-  }
+class SignupForm extends Component {
+  state = {
+    data: {
+      email: "",
+      password: ""
+    },
+    errors: {},
+    loading: false
+  };
 
-  onChange = e =>
+  onChange = e => {
     this.setState({
       data: {
         ...this.state.data,
         [e.target.name]: e.target.value
       }
     });
+  };
 
   onsubmit = () => {
     const errors = this.validate(this.state.data);
@@ -37,6 +35,7 @@ class LoginForm extends Component {
         );
     }
   };
+
   validate = data => {
     const errors = {};
     if (!Validate.isEmail(data.email)) errors.email = "Invalid Email";
@@ -47,44 +46,44 @@ class LoginForm extends Component {
   render() {
     const { data, errors, loading } = this.state;
     return (
-      <Form onSubmit={this.onsubmit} loading={loading}>
+      <Form onSubmit={this.props.submit} loading={loading}>
         {errors.global && (
           <Message negative>
             <Message.Header>Something going wrong</Message.Header>
             <p>{errors.global}</p>
           </Message>
         )}
-        <Form.Field error={!!errors.email}>
+        <Form.Field>
           <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
+            value={data.email}
             name="email"
             placeholder="example@example.com"
-            value={data.email}
             onChange={this.onChange}
           />
-          {errors.email && <InlineError text="Invalid Email" />}
         </Form.Field>
-        <Form.Field error={!!errors.password}>
-          <label htmlFor="password">password</label>
+        {errors.email && <InlineError text="Invalid email address!" />}
+        <Form.Field>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
-            name="password"
             value={data.password}
+            name="password"
             onChange={this.onChange}
           />
-          {errors.password && <InlineError text="Password cant be blank" />}
         </Form.Field>
-        <Button primary>Login</Button>
+        {errors.password && <InlineError text="password cant't be blank" />}
+        <Button primary>Sigup</Button>
       </Form>
     );
   }
 }
 
-LoginForm.propTypes = {
+SignupForm.propTypes = {
   submit: PropTypes.func.isRequired
 };
 
-export default LoginForm;
+export default SignupForm;
