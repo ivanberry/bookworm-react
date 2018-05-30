@@ -14,3 +14,9 @@ export const confirm = token => dispatch =>
     localStorage.setItem("bookwormJWT", user.token);
     dispatch(userLoggedIn(user));
   });
+
+export const resetPass = data => dispatch =>
+  api.user.resetPass(data).then(user => {
+    localStorage.setItem("bookworm", user.token);
+    dispatch(userLoggedIn(user));
+  });
