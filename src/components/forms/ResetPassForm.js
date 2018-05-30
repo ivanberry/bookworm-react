@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import isEmail from "validator/lib/isEmail";
 import InlineError from "../messages/InlineError";
 
-class ForgetForm extends Component {
+class ResetPassForm extends Component {
   state = {
     data: {
       email: "",
@@ -29,11 +29,9 @@ class ForgetForm extends Component {
     this.setState({ errors });
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
-      this.props
-        .submit(this.state.data)
-        .catch(err =>
-          this.setState({ errors: err.response.data.errors, loading: false })
-        );
+      this.props.submit(this.state.data).catch(err => {
+        this.setState({ errors: err.response.data.errors, loading: false });
+      });
     }
   };
   validate = data => {
@@ -100,8 +98,8 @@ class ForgetForm extends Component {
   }
 }
 
-ForgetForm.propTypes = {
+ResetPassForm.propTypes = {
   submit: PropTypes.func.isRequired
 };
 
-export default ForgetForm;
+export default ResetPassForm;

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import ForgetForm from "../forms/ForgetForm";
+import ResetPassForm from "../forms/ResetPassForm";
 import { resetPass } from "../../actions/user";
 
-class ForgetPassPage extends Component {
+class ResetPassPage extends Component {
   /**
    * 0. reset password -->
    * 1. action call -->
@@ -21,17 +21,17 @@ class ForgetPassPage extends Component {
     return (
       <div>
         <h1>Reset password</h1>
-        <ForgetForm submit={this.submit} />
+        <ResetPassForm submit={this.submit} />
       </div>
     );
   }
 }
 
-ForgetPassPage.propTypes = {
+ResetPassPage.propTypes = {
   resetPass: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired
 };
 
-export default connect(null, { resetPass })(ForgetPassPage);
+export default connect(null, { resetPass })(ResetPassPage);

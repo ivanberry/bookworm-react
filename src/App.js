@@ -22,7 +22,7 @@ const App = ({ location }) => (
     />
     <Route
       location={location}
-      path="/forget_pass"
+      path="/reset_pass"
       exact
       component={ForgetPassPage}
     />
