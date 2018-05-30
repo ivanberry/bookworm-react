@@ -8,3 +8,9 @@ export const signup = data => dispatch => {
     dispatch(userLoggedIn(user));
   });
 };
+
+export const confirm = token => dispatch =>
+  api.user.confirm(token).then(user => {
+    localStorage.setItem("bookwormJWT", user.token);
+    dispatch(userLoggedIn(user));
+  });
