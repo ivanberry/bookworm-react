@@ -4,13 +4,10 @@ import PropTypes from "prop-types";
 import isEmail from "validator/lib/isEmail";
 import InlineError from "../messages/InlineError";
 
-class ResetPassForm extends Component {
+class ForgetPasswordForm extends Component {
   state = {
     data: {
-      email: "",
-      password: "",
-      new_password: "",
-      same_password: ""
+      email: ""
     },
     loading: false,
     errors: {}
@@ -37,10 +34,6 @@ class ResetPassForm extends Component {
   validate = data => {
     const errors = {};
     if (!isEmail(data.email)) errors.email = "Invalid Email";
-    if (!data.password) errors.password = "Cant be blank";
-    if (!data.new_password) errors.new_password = "New password cant be blank";
-    if (data.password === data.new_password && data.password !== "")
-      errors.same_password = "The passwords cant be same";
     return errors;
   };
 
@@ -66,40 +59,14 @@ class ResetPassForm extends Component {
           />
           {errors.email && <InlineError text={errors.email} />}
         </Form.Field>
-        <Form.Field error={!!errors.password || !!errors.same_password}>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={data.password}
-            onChange={this.onChange}
-          />
-          {errors.password && <InlineError text={errors.password} />}
-        </Form.Field>
-        {/* new password field */}
-        <Form.Field error={!!errors.new_password || !!errors.same_password}>
-          <label htmlFor="new_password">New password</label>
-          <input
-            type="password"
-            id="new_password"
-            name="new_password"
-            value={data.new_password}
-            onChange={this.onChange}
-          />
-          {errors.new_password && <InlineError text={errors.new_password} />}
-        </Form.Field>
-        <p>
-          {errors.same_password && <InlineError text={errors.same_password} />}
-        </p>
         <Button primary>Reset</Button>
       </Form>
     );
   }
 }
 
-ResetPassForm.propTypes = {
+ForgetPasswordForm.propTypes = {
   submit: PropTypes.func.isRequired
 };
 
-export default ResetPassForm;
+export default ForgetPasswordForm;

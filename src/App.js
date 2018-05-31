@@ -7,7 +7,7 @@ import LoginPage from "./components/pages/LoginPage";
 import DashboardPage from "./components/pages/DashboardPage";
 import SignupPage from "./components/pages/SignupPage";
 import ConfirmationPage from "./components/pages/ConfirmationPage";
-import ForgetPassPage from "./components/pages/ForgetPassPage";
+import ForgetPasswordPage from "./components/pages/ForgetPasswordPage";
 import UserRoute from "./components/routes/UserRoute";
 import GuestRoute from "./components/routes/GuestRoute";
 
@@ -20,11 +20,11 @@ const App = ({ location }) => (
       exact
       component={ConfirmationPage}
     />
-    <Route
+    <GuestRoute
       location={location}
-      path="/reset_pass"
+      path="/forget_password"
       exact
-      component={ForgetPassPage}
+      component={ForgetPasswordPage}
     />
     <GuestRoute location={location} path="/login" exact component={LoginPage} />
     <GuestRoute

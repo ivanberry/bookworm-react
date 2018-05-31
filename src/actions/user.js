@@ -1,7 +1,6 @@
 import api from "../api";
 import { userLoggedIn } from "./auth";
 
-/* eslint-disable */
 export const signup = data => dispatch => {
   return api.user.signup(data).then(user => {
     localStorage.setItem("bookwormJWT", user.token);
@@ -15,8 +14,6 @@ export const confirm = token => dispatch =>
     dispatch(userLoggedIn(user));
   });
 
-export const resetPass = data => dispatch =>
-  api.user.resetPass(data).then(user => {
-    localStorage.setItem("bookworm", user.token);
-    dispatch(userLoggedIn(user));
-  });
+// send the email to server and request a reset password uri, this does nothing to the redux store
+export const resetPasswordRequest = ({ email }) => () =>
+  api.user.resetPasswordRequest(email);

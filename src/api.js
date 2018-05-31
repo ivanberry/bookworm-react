@@ -8,9 +8,9 @@ export default {
       axios.post("/api/user", { user }).then(res => res.data.user),
     confirm: token =>
       axios.post("/api/auth/confirmation", { token }).then(res => res.data),
-    resetPass: credentials =>
+    resetPasswordRequest: email =>
       axios
-        .post("/api/user/reset_pass", { credentials })
+        .post("/api/user/reset_password", { email })
         .then(res => res.data.user)
         .catch(err => err.data.errors)
   }
