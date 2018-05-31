@@ -13,6 +13,7 @@ export default {
         .post("/api/user/reset_password_request", { email })
         .then(res => res.data.user)
         .catch(err => err.data.errors),
-    validateToken: token => axios.post("/api/auth/validate_token", { token })
+    validateToken: token => axios.post("/api/auth/validate_token", { token }),
+    resetPassword: data => axios.post("/api/auth/reset_password", { data })
   }
 };

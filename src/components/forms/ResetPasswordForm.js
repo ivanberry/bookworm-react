@@ -6,6 +6,7 @@ import InlineError from "../messages/InlineError";
 class ResetPasswordForm extends Component {
   state = {
     data: {
+      token: this.props.token,
       password: "",
       passwordConfirm: ""
     },
@@ -37,7 +38,7 @@ class ResetPasswordForm extends Component {
     if (!data.password) errors.password = "Password can't be blank";
     if (!data.passwordConfirm) errors.passwordConfirm = "Confirm password.";
     if (data.password !== data.passwordConfirm)
-      errors.passwordConfirm = "Passwords must be same.";
+      errors.passwordConfirm = "Passwords must match.";
     return errors;
   };
 
@@ -82,6 +83,7 @@ class ResetPasswordForm extends Component {
 }
 
 ResetPasswordForm.propTypes = {
+  token: PropTypes.string.isRequired,
   submit: PropTypes.func.isRequired
 };
 
