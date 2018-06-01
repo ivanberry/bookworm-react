@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Segment, Dropdown } from "semantic-ui-react";
 import Axios from "axios";
+import PropTypes from "prop-types";
 
 class SearchBookForm extends Component {
   state = {
@@ -51,10 +52,15 @@ class SearchBookForm extends Component {
           loading={this.state.loading}
           options={this.state.options}
           onSearchChange={this.onSearchChange}
+          onClick={this.props.onBookClick}
         />
       </Segment>
     );
   }
 }
+
+SearchBookForm.propTypes = {
+  onBookClick: PropTypes.func.isRequired
+};
 
 export default SearchBookForm;
