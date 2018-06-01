@@ -13,6 +13,7 @@ import UserRoute from "./components/routes/UserRoute";
 import ResetPasswordPage from "./components/pages/ResetPasswordPage";
 import GuestRoute from "./components/routes/GuestRoute";
 import TopNavigation from "./components/navigation/TopNavigation";
+import NewBookPage from "./components/pages/NewBookPage";
 
 const App = ({ location, isAuthenticate }) => (
   <div className="ui container">
@@ -48,6 +49,12 @@ const App = ({ location, isAuthenticate }) => (
       path="/dashboard"
       exact
       component={DashboardPage}
+    />
+    <UserRoute
+      location={location}
+      path="/books/new"
+      exact
+      component={NewBookPage}
     />
   </div>
 );
