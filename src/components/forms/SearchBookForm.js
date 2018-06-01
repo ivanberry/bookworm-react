@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { Segment, Dropdown } from "semantic-ui-react";
 import Axios from "axios";
 
@@ -22,7 +21,7 @@ class SearchBookForm extends Component {
 
   fetchOptions = () => {
     if (!this.state.query) return;
-    this.setState({ loading: true });
+    this.setState({ loading: true, query: "" });
     Axios.get(`/api/books/search?q=${this.state.query}`)
       .then(res => res.data.books)
       .then(books => {
@@ -36,6 +35,7 @@ class SearchBookForm extends Component {
             text: book.title
           });
         });
+        this.setState({ loading: false, options, books: bookHash });
       });
   };
 
@@ -47,6 +47,7 @@ class SearchBookForm extends Component {
           fluid
           search
           placeholder="Filter books"
+          value={this.state.query}
           loading={this.state.loading}
           options={this.state.options}
           onSearchChange={this.onSearchChange}
@@ -55,7 +56,5 @@ class SearchBookForm extends Component {
     );
   }
 }
-
-SearchBookForm.propTypes = {};
 
 export default SearchBookForm;
