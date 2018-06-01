@@ -20,9 +20,14 @@ class SearchBookForm extends Component {
     this.timer = setTimeout(this.fetchOptions, 1000);
   };
 
+  onChange = (e, data) => {
+    this.setState({ query: data.value });
+    this.props.onBookSelect(this.state.books[data.value]);
+  };
+
   fetchOptions = () => {
     if (!this.state.query) return;
-    this.setState({ loading: true, query: "" });
+    this.setState({ loading: true });
     Axios.get(`/api/books/search?q=${this.state.query}`)
       .then(res => res.data.books)
       .then(books => {
@@ -52,7 +57,7 @@ class SearchBookForm extends Component {
           loading={this.state.loading}
           options={this.state.options}
           onSearchChange={this.onSearchChange}
-          onClick={this.props.onBookClick}
+          onChange={this.onChange}
         />
       </Segment>
     );
@@ -60,7 +65,7 @@ class SearchBookForm extends Component {
 }
 
 SearchBookForm.propTypes = {
-  onBookClick: PropTypes.func.isRequired
+  onBookSelect: PropTypes.func.isRequired
 };
 
 export default SearchBookForm;
