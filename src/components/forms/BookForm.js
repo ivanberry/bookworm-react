@@ -12,6 +12,7 @@ class BookForm extends Component {
       cover: this.props.book.covers[0]
     },
     covers: this.props.book.covers,
+    index: 0,
     loading: false,
     errors: {}
   };
@@ -37,6 +38,15 @@ class BookForm extends Component {
 
   submit = () => {
     this.props.submit().then();
+  };
+
+  changeCover = () => {
+    const { index, covers } = this.state;
+    const newIndex = index + 1 >= covers.length ? 0 : index + 1;
+    this.setState({
+      index: newIndex,
+      data: { ...this.state.data, cover: covers[newIndex] }
+    });
   };
 
   render() {
@@ -80,6 +90,11 @@ class BookForm extends Component {
               </Grid.Column>
               <Grid.Column>
                 <Image src={data.cover} size="small" />
+                {this.state.covers.length > 1 && (
+                  <a role="button" tabIndex={0} onClick={this.changeCover}>
+                    Change cover
+                  </a>
+                )}
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
