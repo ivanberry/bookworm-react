@@ -36,6 +36,7 @@ class BookForm extends Component {
       [e.target.name]: parseInt(e.target.value, 10)
     });
 
+  // TODO: things after submiting
   submit = () => {
     this.props.submit().then();
   };
