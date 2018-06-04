@@ -37,8 +37,13 @@ class BookForm extends Component {
     });
 
   // TODO: things after submiting
-  submit = () => {
-    this.props.submit().then();
+  submit = e => {
+    e.preventDefault();
+    this.props
+      .submit(this.state.data)
+      .catch(err =>
+        this.setState({ errors: err.response.data.errors, loading: false })
+      );
   };
 
   changeCover = () => {
