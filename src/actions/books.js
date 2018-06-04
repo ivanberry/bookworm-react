@@ -17,14 +17,12 @@ function bookCreated(data) {
   };
 }
 
-export const createBook = data => dispatch => {
+export const createBook = data => dispatch =>
   api.books
     .create(data)
     .then(book => dispatch(bookCreated(normalize(book), bookSchema)));
-};
 
-export const fetchBooks = () => dispatch => {
+export const fetchBooks = () => dispatch =>
   api.books.fetchAll().then(books => {
     dispatch(booksFetched(normalize(books, [bookSchema])));
   });
-};
