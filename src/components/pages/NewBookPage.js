@@ -16,11 +16,7 @@ class NewBookPage extends Component {
       .get(`/api/books/fetchPage?goodreadsId=${book.goodreadsId}`)
       .then(res => res.data.page)
       .then(page => {
-        // TODO: why this setState won't make BookForm re-render?
         this.setState({ book: { ...book, page } });
-
-        // How to set a state doest not exist in state?
-        // this.setState({ book: { ...book }, page });
       });
   };
 
