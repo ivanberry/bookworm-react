@@ -1,5 +1,7 @@
+import { normalize } from "normalizr";
 import { BOOKS_FETCHED } from "../types";
 import api from "../api";
+import { bookSchema } from "../schemas";
 
 function booksFetched(data) {
   return {
@@ -15,6 +17,6 @@ export const addNewBook = data => dispatch => {
 
 export const fetchBooks = () => dispatch => {
   api.books.fetchAll().then(books => {
-    dispatch(booksFetched(books));
+    dispatch(booksFetched(normalize(books, [bookSchema])));
   });
 };

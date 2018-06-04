@@ -6,7 +6,7 @@ export default function book(state = {}, action = {}) {
     case BOOKS_FETCHED:
       return {
         ...state,
-        ...action.data
+        ...action.data.entities.books
       };
     default:
       return state;
