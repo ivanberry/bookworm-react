@@ -17,7 +17,7 @@ class DashboardPage extends Component {
     return (
       <div>
         {!isConfirmed && <ConfirmEmailMessage />}
-        {books.length === 0 && <AddBookCtA />}
+        {books.length === 0 ? <AddBookCtA /> : "You have books!"}
       </div>
     );
   }
@@ -25,9 +25,13 @@ class DashboardPage extends Component {
 
 DashboardPage.propTypes = {
   isConfirmed: PropTypes.bool.isRequired,
-  books: PropTypes.shape({
-    title: PropTypes.string.isRequired
-  }).isRequired,
+  books: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+      page: PropTypes.number.isRequired
+    }).isRequired
+  ).isRequired,
   fetchBooks: PropTypes.func.isRequired
 };
 

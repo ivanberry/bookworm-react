@@ -17,10 +17,11 @@ function bookCreated(data) {
   };
 }
 
+// must return a promise
 export const createBook = data => dispatch =>
   api.books
     .create(data)
-    .then(book => dispatch(bookCreated(normalize(book), bookSchema)));
+    .then(book => dispatch(bookCreated(normalize(book, bookSchema))));
 
 export const fetchBooks = () => dispatch =>
   api.books.fetchAll().then(books => {
