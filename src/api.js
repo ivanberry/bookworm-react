@@ -14,7 +14,9 @@ export default {
         .then(res => res.data.user)
         .catch(err => err.data.errors),
     validateToken: token => axios.post("/api/auth/validate_token", { token }),
-    resetPassword: data => axios.post("/api/auth/reset_password", { data })
+    resetPassword: data => axios.post("/api/auth/reset_password", { data }),
+    fetchCurrentUser: () =>
+      axios.get("/api/user/current_user").then(res => res.data.user)
   },
   books: {
     create: book =>

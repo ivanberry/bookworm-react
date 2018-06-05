@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route } from "react-router-dom";
 import "semantic-ui-css/semantic.min.css";
-import decode from "jwt-decode";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
@@ -10,7 +9,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 import rootReducer from "./rootReducer";
-import { userLoggedIn } from "./actions/auth";
+import { userFetched, fetchCurrentUser } from "./actions/user";
 import setAuthorizationHeader from "./utils/setAuthorizationHeader";
 
 const store = createStore(
@@ -19,14 +18,10 @@ const store = createStore(
 );
 
 if (localStorage.bookwormJWT) {
-  const payload = decode(localStorage.bookwormJWT);
-  const user = {
-    token: localStorage.bookwormJWT,
-    confirm: payload.confirm,
-    email: payload.email
-  };
   setAuthorizationHeader(localStorage.bookwormJWT);
-  store.dispatch(userLoggedIn(user));
+  store.dispatch(fetchCurrentUser());
+} else {
+  store.dispatch(userFetched({}));
 }
 
 ReactDOM.render(
